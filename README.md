@@ -32,8 +32,6 @@ Status codes are sent back by the server in the HTTP response to tell the client
 <details>   
 <summary>Click here for more details on each code.</summary>   
   
-**Informational**:   
-I wanted to include these codes because while they are not used in HTTP/1.0, they can be used in experimental applications.   
 **Successful**:   
 client request is successfully received, understood, and accepted.
 - `200 OK`: the request was successful and the information sent back is dependent on the request method used
