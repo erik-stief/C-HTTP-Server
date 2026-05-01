@@ -28,8 +28,10 @@ Methods let clients express different intentions to the server beyond just fetch
 
 **Status Codes**   
 Status codes are sent back by the server in the HTTP response to tell the client what happened with the request. HTTP classifies these status codes into 5 categories: *Informational - 1xx*, *Success - 2xx*, *Redirection - 3xx*, *Client Error - 4xx*, and *Server Error - 5xx*.   
-<details>
-<summary>Click here for more details on each code.</summary>
+
+<details>   
+<summary>Click here for more details on each code.</summary>   
+  
 **Informational**:   
 I wanted to include these codes because while they are not used in HTTP/1.0, they can be used in experimental applications.   
 **Successful**:   
@@ -55,7 +57,8 @@ The server is unable to complete the request.
 - `500 INTERNAL SERVER ERROR`: The server was unable to complete the request due to an unexpected condition.
 - `501 NOT IMPLEMENTED`: The server does not support the functionality to complete the request, often sent in response to unknown request methods.
 - `502 BAD GATEWAY`: A proxy/gateway server received an invalid response from an upstream server while trying to fulfill the request.
-- `503 SERVICE UNAVAILABLE`: The server is currently down and unable to handle the request due to maintenance or overload. The situation should be temporary.
+- `503 SERVICE UNAVAILABLE`: The server is currently down and unable to handle the request due to maintenance or overload. The situation should be temporary.   
+  
 </details>
 - Hypertext Transfer Protocol -- HTTP/1.0: https://datatracker.ietf.org/doc/html/rfc1945
 
