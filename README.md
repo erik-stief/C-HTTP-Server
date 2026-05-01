@@ -38,18 +38,21 @@ client request is successfully received, understood, and accepted.
 - `201 CREATED`: the request was successful and a new resource was created
 - `202 ACCEPTED`: the request was accepted but still needs to be processed by the server, which could result in
 - `204 NO CONTENT`: the server completed the request but does not have any information to send back
+
 **Redirection**:   
 Further action needs to be taken by the client in order to complete the request.
 - `300 MULTIPLE CHOICES`: Not directly used by HTTP/1.0 but is used to interpret redirection responses
 - `301 MOVED PERMANENTLY`: the requested resource has been moved to a new permanent URL and should be accessed there
 - `302 MOVED TEMPORARILY`: the requested resource has been moved to a temporary URL and should be accessed through the current access point
 - `304 NOT MODIFIED`: the client has performed a conditional GET request, but the document has not been modified since the date and time specified in the If-Modified-Since field, the server must respond with this status code and not send an Entity-Body to the client
+  
 **Client Error**:   
 Occurs when the client errors and cannot complete the request, the client will immediately cease all data transmission.
 - `400 BAD REQUEST`: The request was not understood by the server due to malformed request syntax
 - `401 UNAUTHORIZED`: The request requires client authentication and results in a response containing a WWW-Authenticate header field
 - `403 FORBIDDEN`: The server received the request but won't complete it, a reason can be stated or not given.
 - `404 NOT FOUND`: The requested URI was not found by the server.
+
 **Server Error**:   
 The server is unable to complete the request.
 - `500 INTERNAL SERVER ERROR`: The server was unable to complete the request due to an unexpected condition.
