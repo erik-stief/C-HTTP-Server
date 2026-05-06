@@ -108,10 +108,10 @@ void main() {
 ```
 
 Used pythons hex function to get the hexadecimal value of port 8080 (0x1f90), which we then reverse to 0x901f for the sockaddr_in struct.   
-![Hex Value of Port 8080](/assets/port_hex_value.png)   
+![Hex Value of Port 8080](/Assets/port_hex_value.png)   
 
 The server compiles with some warning, as I didn't set the sockaddr_in struct as a const. For the purposes of this project this warning can be ignored.   
-![C Server Compilation](/assets/server_compilation.png)   
+![C Server Compilation](/Assets/server_compilation.png)   
 
 Socket Bind succeeded and returned 0.   
-![Terminal Output of Strace](/assets/strace_output.png)   
+![Terminal Output of Strace](/Assets/strace_output.png)   
