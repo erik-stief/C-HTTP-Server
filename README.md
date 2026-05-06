@@ -2,7 +2,8 @@
 While I understand most people find the idea of an HTTP server outdated, but I believe the core and low level concepts I would learn when developing my own project are very important to my cybersecurity journey. So in this project I will be building an HTTP server from scratch in the C programming language to work on my network and low level programming.
 
 ## HOW I STARTED MY PROJECT:
-This is a project that was suggested to me by multiple people and sources, and while I do have a relatively good understanding of the C programming language, I have never done any network programming in it. So I am starting this project off by researching the networking side of this project first. 
+This is a project that was suggested to me by multiple people and sources, and while I do have a relatively good understanding of the C programming language, I have never done any network programming in it. So I am starting this project off by researching the networking side of this project first.
+**Disclaimer:** This work represents my own original efforts and understanding. I did not use any artificial intelligence tools or services at any stage of this project.
 ### UNDERSTATING HTTP:
 I started my development journey by reading the HTTP standard itself, specifically RFC 1945. I have learned about this protocol prior to this project but wanted to read the documentation as a reminder. I have included a link to the source I used, but will state my findings first.   
 HTTP uses a request/response system, where a client(request senders) establishes a connection by sending a request to the server containing information, the server can then respond with success or error code. I will break down what each of the transactions look like.   
@@ -66,3 +67,51 @@ The server is unable to complete the request.
 ### UNDERSTANDING SOCKETS:
 - Beej's Guide to Network Programming: https://beej.us/guide/bgnet/
 
+### UNDERSTANDING MY CODE (WIP):
+Here I have coded a simple HTTP server and will breakdown my understanding of what the code does.   
+This server is hosted locally and runs on port 8080.   
+
+```
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <string.h>
+#include <fcntl.h>
+#include <sys/sendfile.h>
+#include <unistd.h>
+
+void main() {
+  int sock = socket(AF_INET, SOCK_STREAM, 0);
+  
+  struct sockaddr_in addr = {
+    AF_INET,
+    0x901f, //Reversed Hex value of 8080 (port we connect to)
+    0
+  };
+  
+  bind(sock, &addr, sizeof(addr));
+  
+  listen(sock, 10);
+  
+  int client_fd = accept(sock, 0, 0);
+  
+  char buffer[256] = {0};
+  recv(client_fd, buffer, 256, 0);
+  
+  char* file = buffer + 5;
+  *strchr(file, ' ') = 0;
+  int opened_fd = open(file, O_RDONLY);
+  sendfile(client_fd, opened_fd, 0, 256);
+  close(opened_fd);
+  close(client_fd);
+  close(sock);
+}
+```
+
+Used pythons hex function to get the hexadecimal value of port 8080 (0x1f90), which we then reverse to 0x901f for the sockaddr_in struct.   
+![Hex Value of Port 8080](/assets/port_hex_value.png)   
+
+The server compiles with some warning, as I didn't set the sockaddr_in struct as a const. For the purposes of this project this warning can be ignored.   
+![C Server Compilation](/assets/server_compilation.png)   
+
+Socket Bind succeeded and returned 0.   
+![Terminal Output of Strace](/assets/strace_output.png)   
